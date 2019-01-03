@@ -51,21 +51,42 @@ for (i, x) in board.iter().enumerate() {
 }
 
 #[test]
-fn cell_checking(){
+fn alive_cell_checking(){
 let mut board: Vec<Vec<u8>>;
 board = create_board(10,10);
 
-board[1][1] = 1u8;
+board[1][1] = alive;
 assert!(check_cell(&board, 1,1)==dead);
+
 
 board[0][0] = 1u8;
 assert!(check_cell(&board, 1,1)==dead);
 
 board[0][1] = 1u8;
-assert!(check_cell(&board, 1,1)==alive);
+assert!(check_cell(&board, 1,1)==dead);
 
 board[0][2] = 1u8;
+assert!(check_cell(&board, 1,1)==alive);
+
+}
+
+#[test]
+fn dead_cell_checking(){
+let mut board: Vec<Vec<u8>>;
+board = create_board(10,10);
+
+board[1][1] = dead;
+
 assert!(check_cell(&board, 1,1)==dead);
+
+board[0][0] = alive;
+assert!(check_cell(&board, 1,1)==dead);
+
+board[0][1] = alive;
+assert!(check_cell(&board, 1,1)==alive);
+
+board[0][2] = alive;
+//assert!(check_cell(&board, 1,1)==dead);
 
 }
 
